@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="my-assemble" />
+        <module name="my-biz" />
+        <module name="my-common" />
+        <module name="my-test" />
+        <module name="my-web-backend" />
+        <module name="my-web-common" />
+        <module name="my-web-front" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="my-assemble" target="1.8" />
+      <module name="my-biz" target="1.8" />
+      <module name="my-common" target="1.8" />
+      <module name="my-parent" target="1.8" />
+      <module name="my-test" target="1.8" />
+      <module name="my-web" target="1.8" />
+      <module name="my-web-backend" target="1.8" />
+      <module name="my-web-common" target="1.8" />
+      <module name="my-web-front" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

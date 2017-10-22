@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/my-assemble/my-assemble.iml" filepath="$PROJECT_DIR$/my-assemble/my-assemble.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-biz/my-biz.iml" filepath="$PROJECT_DIR$/my-biz/my-biz.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-common/my-common.iml" filepath="$PROJECT_DIR$/my-common/my-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-parent.iml" filepath="$PROJECT_DIR$/my-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-test/my-test.iml" filepath="$PROJECT_DIR$/my-test/my-test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-web/my-web.iml" filepath="$PROJECT_DIR$/my-web/my-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-web/my-web-backend/my-web-backend.iml" filepath="$PROJECT_DIR$/my-web/my-web-backend/my-web-backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-web/my-web-common/my-web-common.iml" filepath="$PROJECT_DIR$/my-web/my-web-common/my-web-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-web/my-web-front/my-web-front.iml" filepath="$PROJECT_DIR$/my-web/my-web-front/my-web-front.iml" />
+      <module fileurl="file://$PROJECT_DIR$/my-web/myweb.iml" filepath="$PROJECT_DIR$/my-web/myweb.iml" />
+    </modules>
+  </component>
+</project>

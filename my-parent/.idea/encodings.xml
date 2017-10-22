@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-assemble" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-biz" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-test" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-web" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-web-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-web/my-web-backend" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-web/my-web-common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/my-web/my-web-front" charset="UTF-8" />
+  </component>
+</project>
