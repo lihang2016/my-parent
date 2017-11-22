@@ -30,11 +30,7 @@ public class QuestionsContrllor extends FrontContrllor {
      */
     @RequestMapping("/questions/find.json")
     public ViewInfo find(QuestionsSearchDto questionsSearchDto){
-//        System.out.println(MyContext.get().getId());
-        synchronized (questionsSearchDto.getName()){
             return questionsAppService.find(questionsSearchDto).convertTo();
-        }
-
     }
 
     /**

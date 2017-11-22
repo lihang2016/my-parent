@@ -41,16 +41,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>20.0-rc1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.google.code.findbugs</groupId>
-            <artifactId>jsr305</artifactId>
-            <version>3.0.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.my.pleasure</groupId>
             <artifactId>my-common</artifactId>
             <version>${project.parent.version}</version>

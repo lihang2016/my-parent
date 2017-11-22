@@ -3,7 +3,6 @@ package com.my.web.front.advertisement;
 import com.my.biz.advertisement.app.service.AdvertisementAppService;
 import com.my.biz.common.interactive.ViewInfo;
 import com.my.web.common.webcommon.requestmapping.FrontContrllor;
-import com.my.web.front.model.ModelId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +24,8 @@ public class AdvertisementContrllor  extends FrontContrllor{
      * @return
      */
     @GetMapping("/advertisement/findByPositionId")
-    public ViewInfo findAdvertisementByPositionId(ModelId modelId){
-        return advertisementAppService.findByPositionId(modelId.getId()).convertTo();
+    public ViewInfo findAdvertisementByPositionId(Long modelId){
+        return advertisementAppService.findByPositionId(modelId).convertTo();
     }
 
 }

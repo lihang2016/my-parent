@@ -2,10 +2,8 @@ package com.my.biz.advertisement.domain.service;
 
 
 import com.my.biz.advertisement.domain.entity.Advertisement;
-import com.my.biz.advertisement.domain.repository.AdvertisementRepository;
-import com.my.biz.subject.app.service.SubjectAppService;
+import com.my.biz.advertisement.domain.repository.AdvertisementDao;
 import com.my.common.annotation.DomainService;
-import com.my.common.exception.CPBusinessException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -18,20 +16,15 @@ import java.util.List;
 public class AdvertisementDomainService {
 
     @Autowired
-    private AdvertisementRepository advertisementRepository;
+    private AdvertisementDao advertisementDao;
 
-    @Autowired
-    private SubjectAppService subjectAppService;
     /**
      * 查询广告
      * @param positionId
      * @return
      */
     public List<Advertisement> findByPositionId(Long  positionId){
-        List<Advertisement> advertisement=advertisementRepository.findByPositionId(positionId);
-        if(advertisement==null && advertisement.size()<=0){
-            CPBusinessException.throwIt("positionId 不存在");
-        }
+        List<Advertisement> advertisement=advertisementDao.getAll();
         return advertisement;
     }
 

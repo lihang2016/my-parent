@@ -9,11 +9,17 @@ import com.my.biz.common.event.EventHandler;
 import com.my.biz.common.udc.StringToUDCConverter;
 import com.my.biz.common.udc.UDC;
 import com.my.biz.common.udc.UDCDeserializer;
+import com.my.biz.scaneum.listener.MeataApplicationReadyListener;
+import com.my.common.mapper.pages.PageObjectFactory;
+import com.my.common.mapper.pages.PageObjectWrapperFactory;
+import com.my.common.mapper.pages.PageableExecutorInterceptor;
 import net.engio.mbassy.bus.config.BusConfiguration;
 import net.engio.mbassy.bus.config.Feature;
 import net.engio.mbassy.bus.config.IBusConfiguration;
 import net.engio.mbassy.bus.error.IPublicationErrorHandler;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
@@ -24,6 +30,7 @@ import org.springframework.core.type.filter.AssignableTypeFilter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 
 /**
  *配置事件类
@@ -31,6 +38,9 @@ import javax.annotation.PostConstruct;
  */
 @Configuration
 public class CommonConfigration {
+
+    @Autowired
+    private List<SqlSessionFactory> sqlSessionFactoryList;
     @Bean
     public static BeanDefinitionRegistryPostProcessor cpValidatorBeanDefinitionRegistryPostProcessor() {
         return new BeanDefinitionRegistryPostProcessor() {
@@ -47,12 +57,19 @@ public class CommonConfigration {
             }
         };
     }
-
-//    @Bean
-//    public static BeanPostProcessor cpAppServiceBeanCheckerPostProcessor() {
-//        return new CPAppServiceBeanCheckerPostProcessor();
-//    }
-
+    /**
+     * 自定义分页插件配置
+     */
+    @PostConstruct
+    public void addPageInterceptor() throws Exception {
+        PageableExecutorInterceptor interceptor = new PageableExecutorInterceptor();
+        for (SqlSessionFactory sqlSessionFactory : sqlSessionFactoryList) {
+            sqlSessionFactory.getConfiguration().addInterceptor(interceptor);
+            sqlSessionFactory.getConfiguration().setObjectFactory(new PageObjectFactory());
+            sqlSessionFactory.getConfiguration().setObjectWrapperFactory(new PageObjectWrapperFactory());
+            sqlSessionFactory.getConfiguration().setUseGeneratedKeys(true);
+        }
+    }
 
     @Bean
     public ApplicationReadyListener applicationReadyListener() {
@@ -91,6 +108,10 @@ public class CommonConfigration {
     @Bean
     public DateConverter dateConverter() {
         return new DateConverter();
+    }
+    @Bean
+    public MeataApplicationReadyListener meataApplicationReadyListener(){
+        return new MeataApplicationReadyListener();
     }
 
     @PostConstruct

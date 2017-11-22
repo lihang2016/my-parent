@@ -20,6 +20,19 @@ public class Advertisement extends AggEntity {
     @Column(name="position_id",columnDefinition = "int(11) comment '广告位置'")
     private Long positionId;
 
+//    @Column(name="sex",columnDefinition = "int(1) comment '性别'")
+//    @UDC.EnumTypeCode("sex")
+//    private UDC sex;
+
+//
+//    public UDC getSex() {
+//        return sex;
+//    }
+//
+//    public void setSex(UDC sex) {
+//        this.sex = sex;
+//    }
+
     public String getImageUrl() {
         return imageUrl;
     }

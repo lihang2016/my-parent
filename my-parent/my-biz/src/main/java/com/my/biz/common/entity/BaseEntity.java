@@ -13,10 +13,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.support.AbstractBeanFactory;
 import org.springframework.context.support.AbstractApplicationContext;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -91,7 +88,7 @@ public class BaseEntity implements Serializable {
         autowiredAnnotationBeanPostProcessor.postProcessPropertyValues(null, null, this, getClass().getName());
     }
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键'")
     protected Long id;
 

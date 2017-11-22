@@ -31,6 +31,14 @@ public class ViewInfo implements Serializable {
      */
     private String message;
 
+
+    public static ViewInfo from(Object data) {
+        ViewInfo viewResultInfo = new ViewInfo();
+        viewResultInfo.setSuccess(true);
+        viewResultInfo.setCode("100");
+        viewResultInfo.setData(data);
+        return viewResultInfo;
+    }
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
