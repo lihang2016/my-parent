@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @Setter
 public class LoginDto extends BaseDto {
     @NotNull(message = "账号不能为空")
-    private String phone;
+    private String account;
     @NotNull(message = "密码不能为空")
     private String password;
 

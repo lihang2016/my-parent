@@ -1,5 +1,7 @@
 package com.my.biz.common.interactive;
 
+import com.my.common.utils.BeanCopier;
+
 /**
  * Created by 96230 on 2017/5/29.
  */
@@ -9,22 +11,32 @@ public   class SingleResponse<T>  extends CPResponse{
     public SingleResponse(T data){
         this.data=data;
     }
+
     public SingleResponse(){
 
     }
 
+    public static <T, S> SingleResponse<S> from(T t, Class<S> clazz,String ...ignoreProperties) {
+        SingleResponse<S> singleResult = new SingleResponse<>();
+        if (t != null) {
+            singleResult.setData(BeanCopier.copy(t, clazz, BeanCopier.CopyStrategy.IGNORE_NULL,ignoreProperties));
+        }
+        singleResult.setSuccess(Boolean.TRUE);
+        return singleResult;
+    }
+
     public static <T> SingleResponse<T> from(T data){
         SingleResponse<T> response = new SingleResponse<>();
-            if (data == null) {
-                response.setCode(999);
-                response.setMessage("获取数据失败");
-                response.setSuccess(Boolean.FALSE);
-            } else {
-                response.setData(data);
-                response.setCode(100);
-                response.setMessage("获取数据成功");
-                response.setSuccess(Boolean.TRUE);
-            }
+        if (data == null) {
+            response.setCode(999);
+            response.setMessage("获取数据失败");
+            response.setSuccess(Boolean.FALSE);
+        } else {
+            response.setData(data);
+            response.setCode(100);
+            response.setMessage("获取数据成功");
+            response.setSuccess(Boolean.TRUE);
+        }
         return response;
     }
 

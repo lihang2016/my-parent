@@ -11,6 +11,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
@@ -28,6 +29,7 @@ import static org.apache.shiro.web.filter.mgt.DefaultFilter.user;
 public class MyShiroRealm extends AuthorizingRealm {
 
     @Autowired
+    @Lazy
     private MemberAppService memberAppService;
     @Autowired
     StringRedisTemplate stringRedisTemplate;
@@ -60,14 +62,12 @@ public class MyShiroRealm extends AuthorizingRealm {
             throw new DisabledAccountException("由于密码输入错误次数大于5次，帐号已经禁止登录！");
         }
         LoginDto loginDto=new LoginDto();
-        loginDto.setPhone(name);
+        loginDto.setAccount(name);
         loginDto.setPassword(password);
         MemberDto memberDto=memberAppService.findByPhoneAndPassword(loginDto).getData();
         if(memberDto==null){
             throw new  AuthenticationException("账号或者密码错误");
         }
-        //存登录信息
-//        MyContext.set(memberDto);
         //清空登录计数
         opsForValue.set(SHIRO_LOGIN_COUNT+name, "0");
         return new SimpleAuthenticationInfo(memberDto, password, getName());

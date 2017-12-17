@@ -24,11 +24,11 @@ public class AllTypeTest extends TestBase {
     public void findByType(){
         AllTypeSearchDto allTypeSearchDto=new AllTypeSearchDto();
         allTypeSearchDto.setType(UDC.newUDCWithItemCode("allType","paper"));
-      log.info(JSON.toJSONString(allTypeAppService.findAllType(allTypeSearchDto).convertTo()));
+      log.info(JSON.toJSONString(allTypeAppService.findAllType(allTypeSearchDto).to()));
     }
 
     @Test
     public void testFindByTypeId(){
-        log.info(JSON.toJSONString(allTypeAppService.findAllTypeById(1L).convertTo()));
+        log.info(JSON.toJSONString(allTypeAppService.findAllTypeById(1L).to()));
     }
 }

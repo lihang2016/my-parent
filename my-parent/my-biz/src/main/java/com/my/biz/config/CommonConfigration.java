@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ClassPathBeanDefinitionScanner;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +31,7 @@ import org.springframework.core.type.filter.AssignableTypeFilter;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.MultipartConfigElement;
 import java.util.List;
 
 /**
@@ -76,6 +78,19 @@ public class CommonConfigration {
         return new ApplicationReadyListener();
     }
 
+    /**
+     * 文件上传配置
+     * @return
+     */
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        //文件最大
+        factory.setMaxFileSize("1024000MB"); //KB,MB
+        /// 设置总上传数据总大小
+        factory.setMaxRequestSize("102400000MB");
+        return factory.createMultipartConfig();
+    }
     @Bean
     public EventBus messageBus(ContextWrappedExecutorService asyncEventExecutorService) {
         Feature.AsynchronousHandlerInvocation asynchronousHandlerInvocation = new Feature.AsynchronousHandlerInvocation();

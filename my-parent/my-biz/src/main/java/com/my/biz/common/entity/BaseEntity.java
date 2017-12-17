@@ -6,6 +6,7 @@ import com.my.biz.common.udc.UDCUserType;
 import com.my.biz.common.util.SpringContextHolder;
 import com.my.common.copy.Copier;
 import com.my.common.exception.CPBusinessException;
+import com.my.common.utils.BeanCopier;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
@@ -28,6 +29,7 @@ public class BaseEntity implements Serializable {
     public static final Long NULL_MERCHANT_ID = 1L;
     private static boolean inited = false;
     private static volatile AutowiredAnnotationBeanPostProcessor autowiredAnnotationBeanPostProcessor = null;
+
     /**
      * 转换领域对象为目标类型
      *
@@ -36,15 +38,33 @@ public class BaseEntity implements Serializable {
     public <T> T to(Class<T> clazz) {
         try {
             T t = clazz.newInstance();
-            Copier.copyBean(this,t,Boolean.FALSE,null);
+            Copier.copyBean(this, t, Boolean.FALSE, null);
             return t;
         } catch (Exception e) {
             CPBusinessException.throwIt("实体与dto转换失败");
-           return null;
+            return null;
         }
     }
-    public void from(Object dto) {
-        Copier.copyBean(dto,this,Boolean.FALSE,null);
+
+    /**
+     * 从DTO拷贝属性到领域对象
+     * <p>
+     * 拷贝策略为：1.忽略DTO中的null 2. 忽略DTO属性不兼容 3.忽略DTO中的某些属性
+     * </p>
+     *
+     * @param dto              传输对象
+     * @param ingoreProperties 忽略拷贝的属性,一般为DTO中的非基本类型的属性,举例:UserDto中包含了DepartmentDto,DepartmentDto 拷贝时需要忽略
+     */
+    public void from(Object dto, String... ingoreProperties) {
+        BeanCopier.copy(dto, this, BeanCopier.CopyStrategy.IGNORE_NULL, BeanCopier.NoMatchingRule.IGNORE, ingoreProperties);
+    }
+
+    public void fromContainNUll(Object dto) {
+        BeanCopier.copy(dto, this, BeanCopier.CopyStrategy.CONTAIN_NULL, BeanCopier.NoMatchingRule.EXCEPTION);
+    }
+
+    public void fromContainNUll(Object dto, String... ingoreProperties) {
+        BeanCopier.copy(dto, this, BeanCopier.CopyStrategy.CONTAIN_NULL, BeanCopier.NoMatchingRule.EXCEPTION, ingoreProperties);
     }
 
     /**
@@ -60,14 +80,17 @@ public class BaseEntity implements Serializable {
         }
         return ts;
     }
+
     public static void inited() {
         inited = true;
     }
+
     public BaseEntity() {
         if (inited) {
             autowire();
         }
     }
+
     /**
      * 注入Entity中的@Autowired
      */
@@ -87,6 +110,7 @@ public class BaseEntity implements Serializable {
         }
         autowiredAnnotationBeanPostProcessor.postProcessPropertyValues(null, null, this, getClass().getName());
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键'")

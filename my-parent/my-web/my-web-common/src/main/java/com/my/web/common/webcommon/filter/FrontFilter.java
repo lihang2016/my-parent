@@ -8,13 +8,9 @@ package com.my.web.common.webcommon.filter;
 public class FrontFilter {
 
     public  static CPACLFilter loginFilterRegistrationBean() {
-        CPACLFilter bean = new CPACLFilter.Builder().loginUrl("/front/login.json")
+        CPACLFilter bean = new CPACLFilter.Builder().loginUrl("/front/member/login.json")
                 .notNeedLoginUrls("/front/static/assets/**","/front/product_detail.html","/front/static/css/**","/front/static/fonts/**","/front/static/img/**","/front/static/js/**")
                 .urlPatterns("/front/**").supportUserType("front").build2();
-//        bean.setName("front_loginFilter");
-//        CPACLFilter cpaclFilter=new CPACLFilter();
-//        cpaclFilter.setLoginUrl("");
-
         return bean;
     }
 }

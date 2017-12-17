@@ -28,19 +28,19 @@ public class QuestionsTest extends TestBase {
     @Test
     public void testFind(){
         QuestionsSearchDto questionsSearchDto=new QuestionsSearchDto();
-        log.info(JSON.toJSONString(questionsAppService.find(questionsSearchDto).convertTo()));
+        log.info(JSON.toJSONString(questionsAppService.find(questionsSearchDto).to()));
     }
 
     @Test
     public void testFindPaper(){
         PaperSearchDto paperSearchDto=new PaperSearchDto();
-        log.info(JSON.toJSONString(questionsAppService.findPaper(paperSearchDto).convertTo()));
+        log.info(JSON.toJSONString(questionsAppService.findPaper(paperSearchDto).to()));
     }
 
     @Test
     public void testFindPaperId(){
         SingleResponse<List<QuestionDto>> singleResponse=questionsAppService.findQuestionList(1L);
-        ViewInfo viewInfo=singleResponse.convertTo();
+        ViewInfo viewInfo=singleResponse.to();
         log.info(JSON.toJSONString(viewInfo));
     }
 }

@@ -30,7 +30,10 @@ public class ViewInfo implements Serializable {
      * 返回消息
      */
     private String message;
-
+    public ViewInfo data(Object data){
+        this.data=data;
+        return  this;
+    }
 
     public static ViewInfo from(Object data) {
         ViewInfo viewResultInfo = new ViewInfo();

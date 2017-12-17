@@ -1,6 +1,5 @@
 package com.my.test.member;
 
-import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Lists;
 import com.my.biz.member.app.dto.MemberAnswerDto;
 import com.my.biz.member.app.dto.MemberWriteQuestionDto;
@@ -43,11 +42,9 @@ public class MemberTest extends TestBase {
         memberAnswerDto1.setQuestionId(2L);
         memberAnswerDtoList.add(memberAnswerDto1);
         memberWriteQuestionDto.setMemberAnswerDtoList(memberAnswerDtoList);
-        log.info(JSON.toJSONString(memberAppService.memberTest(memberWriteQuestionDto).convertTo()));
     }
 
     @Test
     public void testMemberTestDesById(){
-        log.info(JSON.toJSONString(memberAppService.findMemberTestById(4L).convertTo()));
     }
 }

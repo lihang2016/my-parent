@@ -20,6 +20,6 @@ public class AdvertisementTest extends TestBase {
 
     @Test
     public void testFindAdvertisementByPositionId(){
-         log.info(JSON.toJSONString(advertisementAppService.findByPositionId(1L).convertTo()));
+         log.info(JSON.toJSONString(advertisementAppService.findByPositionId(1L).to()));
     }
 }

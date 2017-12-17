@@ -14,6 +14,8 @@ package com.my.biz.scaneum.dto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.*;
+
 @Getter
 @Setter
 public class EnumListDto {
@@ -24,5 +26,5 @@ public class EnumListDto {
     /**
      * 枚举类名对应的实例集合
      */
-    private String enumsList;
+    private List<Enum> enumsList;
 }

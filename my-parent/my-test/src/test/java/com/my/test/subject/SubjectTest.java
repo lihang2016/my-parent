@@ -23,11 +23,11 @@ public class SubjectTest extends TestBase {
     public void testSubjectList(){
         SubjectSearchDto subjectSearchDto=new SubjectSearchDto();
         subjectSearchDto.setSubjectChildrenType(1);
-        log.info(JSON.toJSONString(subjectAppService.findSubjectList(subjectSearchDto).convertTo()));
+        log.info(JSON.toJSONString(subjectAppService.findSubjectList(subjectSearchDto).to()));
     }
 
     @Test
     public void testFindById(){
-        log.info(JSON.toJSONString(subjectAppService.findById(1L).convertTo()));
+        log.info(JSON.toJSONString(subjectAppService.findById(1L).to()));
     }
 }

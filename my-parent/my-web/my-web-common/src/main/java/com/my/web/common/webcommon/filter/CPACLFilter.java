@@ -10,6 +10,8 @@
 package com.my.web.common.webcommon.filter;
 
 import com.my.biz.member.app.dto.MemberDto;
+import com.my.common.session.MemberUser;
+import com.my.common.session.MyContext;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 import org.springframework.http.HttpStatus;
@@ -40,30 +42,30 @@ public class CPACLFilter extends OncePerRequestFilter {
     public void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException,
             IOException {
-//
-//        String uri = getRequestURI(request);
-//        if (notNeedLogin(uri)) {
-//            filterChain.doFilter(request, response);
-//        } else {
-//            //超时判断
-////            if (checkSessionTimeout(request, response)) return;
-//            //类型判断
-//            if (checkUserType(request, response)) return;
-//                //认证判断
-//                if (!SecurityUtils.getSubject().isAuthenticated()) {
-//                    response.setStatus(707);
-//                    response.setCharacterEncoding("utf-8");
-//                    response.getWriter().print("not logged");
-//                    return;
-//                } else {
-//                    MemberDto memberDto= (MemberDto) SecurityUtils.getSubject().getPrincipal();
-//                    MemberUser memberUser=new MemberUser();
-//                    memberUser.setId(memberDto.getId());
-//                    MyContext.set(memberUser);
-//                    filterChain.doFilter(request, response);
-//                }
-//        }
-        filterChain.doFilter(request, response);
+
+        String uri = getRequestURI(request);
+        if (notNeedLogin(uri)) {
+            filterChain.doFilter(request, response);
+        } else {
+            //超时判断
+//            if (checkSessionTimeout(request, response)) return;
+            //类型判断
+            if (checkUserType(request, response)) return;
+                //认证判断
+                if (!SecurityUtils.getSubject().isAuthenticated()) {
+                    response.setStatus(707);
+                    response.setCharacterEncoding("utf-8");
+                    response.getWriter().print("not logged");
+                    return;
+                } else {
+                    MemberDto memberDto= (MemberDto) SecurityUtils.getSubject().getPrincipal();
+                    MemberUser memberUser=new MemberUser();
+                    memberUser.setId(memberDto.getId());
+                    MyContext.set(memberUser);
+                }
+            filterChain.doFilter(request, response);
+        }
+
     }
 
 

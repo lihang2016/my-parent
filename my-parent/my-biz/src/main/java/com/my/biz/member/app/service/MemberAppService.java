@@ -26,22 +26,4 @@ public class MemberAppService {
     public SingleResponse<MemberDto> findByPhoneAndPassword(LoginDto loginDto){
         return SingleResponse.from(memberDomainService.findByPhoneAndPassword(loginDto).to(MemberDto.class));
     }
-
-    /**
-     * 级会员考试
-     * @param memberWriteQuestionDto
-     * @return
-     */
-    public SingleResponse<MemberTestDto> memberTest(MemberWriteQuestionDto memberWriteQuestionDto){
-        return SingleResponse.from(memberDomainService.memberTest(memberWriteQuestionDto));
-    }
-
-    /**
-     * 查询会员考试 详情---前端
-     * @param id
-     * @return
-     */
-    public SingleResponse<MemberTestDesDto> findMemberTestById(Long id){
-        return SingleResponse.from(memberDomainService.findMemberTestById(id).to(MemberTestDesDto.class));
-    }
 }
